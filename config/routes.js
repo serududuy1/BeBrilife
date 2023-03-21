@@ -11,10 +11,11 @@ router.delete("/product/:id", api.v1.product.deleteProduct);
 
 // end point users
 router.get("/users", api.v1.user.getAllusers);
-router.get("/total", api.v1.user.getAllusersCount);
 router.post("/users", api.v1.user.createuser);
 router.put("/users/:idUser", api.v1.user.updateuser);
 router.delete("/users/:idUser", api.v1.user.deleteuser);
+
+router.get("/total", api.v1.user.getAllusersCount);
 
 // end point transaction
 router.get("/transaction", api.v1.transaction.getAllTransaction);
