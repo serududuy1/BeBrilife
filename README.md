@@ -90,7 +90,7 @@ Start the server
 ## Update User
 
 ```http
-  POST http://localhost:8000/users/:{user_id}
+  PUT http://localhost:8000/users/:{user_id}
 ```
 
 ##### Body raw
@@ -106,7 +106,7 @@ Start the server
 ## Delete User
 
 ```http
-  POST http://localhost:8000/users/:{user_id}
+  DELETE http://localhost:8000/users/:{user_id}
 ```
 
 ############################################################################
