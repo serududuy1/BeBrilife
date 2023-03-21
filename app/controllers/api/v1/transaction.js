@@ -81,7 +81,7 @@ module.exports = {
       .then((result) => {
         res.status(201).json({
           ResponseCode: "00",
-          ResponseDesc: "Success create transaction",
+          ResponseDesc: `Total order Rp. ${totalTransaction}`,
           data: result,
         });
       })
