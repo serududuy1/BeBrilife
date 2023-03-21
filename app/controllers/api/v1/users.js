@@ -29,4 +29,105 @@ module.exports = {
         return err;
       });
   },
+  async createuser(req, res) {
+    const existUser = await data_user.findOne({
+      where: {
+        user_id: req.body.user_id,
+      },
+    });
+    if (existUser) {
+      res.status(422).json({
+        ResponseCode: "01",
+        ResponseDesc: "user_id already in use!",
+      });
+      return;
+    }
+
+    const data = {
+      user_id: req.body.user_id,
+      user_name: req.body.user_name,
+      active: 0,
+    };
+
+    await data_user
+      .create(data)
+      .then((result) => {
+        res.status(201).json({
+          ResponseCode: "00",
+          ResponseDesc: "Success create user",
+          data: result,
+        });
+      })
+      .catch((err) => {
+        return err;
+      });
+  },
+
+  async updateuser(req, res) {
+    const existUser = await data_user.findOne({
+      where: {
+        user_id: req.params.idUser,
+      },
+    });
+    if (!existUser) {
+      res.status(422).json({
+        ResponseCode: "01",
+        ResponseDesc: "user_id not found!",
+      });
+      return;
+    }
+
+    const data = {
+      user_name: req.body.user_name,
+      active: req.body.active,
+    };
+    console.log(data);
+    await data_user
+      .update(data, {
+        where: {
+          user_id: req.params.idUser,
+        },
+      })
+      .then((result) => {
+        res.status(201).json({
+          ResponseCode: "00",
+          ResponseDesc: `Success create user ${req.params.idUser}`,
+          data: result,
+        });
+      })
+      .catch((err) => {
+        return err;
+      });
+  },
+  async deleteuser(req, res) {
+    const existUser = await data_user.findOne({
+      where: {
+        user_id: req.params.idUser,
+      },
+    });
+    if (!existUser) {
+      res.status(422).json({
+        ResponseCode: "01",
+        ResponseDesc: "user_id not found!",
+      });
+      return;
+    }
+    console.log(req.params.idUser);
+    await data_user
+      .destroy({
+        where: {
+          user_id: req.params.idUser,
+        },
+      })
+      .then((result) => {
+        res.status(201).json({
+          ResponseCode: "00",
+          ResponseDesc: "Success create user",
+          data: result,
+        });
+      })
+      .catch((err) => {
+        return err;
+      });
+  },
 };
