@@ -1,0 +1,19 @@
+const express = require("express");
+const router = express.Router();
+
+const api = require("../app/controllers/api/");
+
+// end point products
+router.get("/products", api.v1.product.getAllProduct);
+router.post("/product", api.v1.product.createProduct);
+router.put("/product/:id", api.v1.product.updateProduct);
+router.delete("/product/:id", api.v1.product.deleteProduct);
+
+// end point users
+router.get("/users", api.v1.user.getAllusers);
+router.get("/total", api.v1.user.getAllusersCount);
+
+// end point transaction
+router.get("/transaction", api.v1.transaction.getAllTransaction);
+
+module.exports = router;
