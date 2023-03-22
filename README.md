@@ -70,6 +70,10 @@ Start the server
 
 ############################################################################
 
+# USERS
+
+############################################################################
+
 ## Create User
 
 ```http
@@ -107,6 +111,102 @@ Start the server
 
 ```http
   DELETE http://localhost:8000/users/:{user_id}
+```
+
+############################################################################
+
+# PRODUCT
+
+############################################################################
+
+## Create Product
+
+```http
+  POST http://localhost:8000/product/
+```
+
+##### Body raw
+
+```bash
+{
+    "product_name" : "bawang",
+    "premium" : "700000"
+}
+```
+
+############################################################################
+
+## Update Product
+
+```http
+  PUT http://localhost:8000/product/:{product_id}
+```
+
+##### Body raw
+
+```bash
+{
+    "product_name" : "bawang",
+    "premium" : "700000"
+}
+```
+
+############################################################################
+
+## Delete Product
+
+```http
+  DELETE http://localhost:8000/product/:{product_id}
+```
+
+############################################################################
+
+# TRANSACTION
+
+############################################################################
+
+## Create Transaction
+
+```http
+  POST http://localhost:8000/transaction/
+```
+
+##### Body raw
+
+```bash
+{
+    "trans_date" : "2023-03-21T18:41:41.000Z",
+    "product_id" : "4",
+    "qty_order" : "2",
+    "user_id" : "A01"
+}
+```
+
+############################################################################
+
+## Update Transaction
+
+```http
+  PUT http://localhost:8000/transaction/:{trans_id}
+```
+
+##### Body raw
+
+```bash
+{
+    "trans_date" : "2023-03-21T18:41:41.000Z",
+    "product_id" : "1",
+    "qty_order" : "6",
+    "user_id" : "C02"
+}
+```
+
+############################################################################
+
+## Delete Transaction
+
+```http
+  DELETE http://localhost:8000/transaction/:{trans_id}
 ```
 
 ############################################################################
