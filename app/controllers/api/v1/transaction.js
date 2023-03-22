@@ -42,7 +42,24 @@ const getTransaction = async (params) => {
 module.exports = {
   async getAllTransaction(req, res) {
     await data_transaction
-      .findAll()
+      .findAll({
+        attributes: [
+          ["trans_id", "trans_id"],
+          ["trans_date", "trans_date"],
+          ["user_id", "user_id"],
+          ["product_id", "product_id"],
+          ["qty_order", "qty_order"],
+          ["total_order", "total_order"],
+        ],
+        include: [
+          {
+            model: data_product,
+          },
+          {
+            model: data_user,
+          },
+        ],
+      })
       .then((result) => {
         res.status(200).json({
           ResponseCode: "00",

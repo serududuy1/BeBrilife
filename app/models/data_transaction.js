@@ -9,9 +9,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      data_transaction.hasOne(models.data_user, {
+      data_transaction.belongsTo(models.data_user, {
         foreignKey: {
           name: "user_id",
+          as: "user_id",
         },
       });
       data_transaction.hasOne(models.data_product, {
