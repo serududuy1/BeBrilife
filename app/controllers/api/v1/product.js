@@ -43,7 +43,7 @@ module.exports = {
       product_name: req.body.product_name,
       premium: req.body.premium,
     };
-    console.log(data);
+
     await data_product
       .update(data, {
         where: {
@@ -62,7 +62,6 @@ module.exports = {
       });
   },
   async deleteProduct(req, res) {
-    console.log(req.params.id);
     await data_product
       .destroy({
         where: {

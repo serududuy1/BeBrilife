@@ -20,5 +20,7 @@ router.get("/total", api.v1.user.getAllusersCount);
 // end point transaction
 router.get("/transaction", api.v1.transaction.getAllTransaction);
 router.post("/transaction", api.v1.transaction.createTransaction);
+router.put("/transaction/:id", api.v1.transaction.updateTransaction);
+router.delete("/transaction/:id", api.v1.transaction.deleteTransaction);
 
 module.exports = router;

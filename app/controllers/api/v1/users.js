@@ -1,5 +1,17 @@
 const { data_user } = require("../../../models");
 
+const getUser = async (params) => {
+  return await data_user
+    .findOne({
+      where: {
+        user_id: params,
+      },
+    })
+    .then((result) => {
+      return result;
+    });
+};
+
 module.exports = {
   async getAllusers(req, res) {
     await data_user
@@ -30,11 +42,8 @@ module.exports = {
       });
   },
   async createuser(req, res) {
-    const existUser = await data_user.findOne({
-      where: {
-        user_id: req.body.user_id,
-      },
-    });
+    const existUser = await getUser(req.body.user_id);
+
     if (existUser) {
       res.status(422).json({
         ResponseCode: "01",
@@ -64,11 +73,8 @@ module.exports = {
   },
 
   async updateuser(req, res) {
-    const existUser = await data_user.findOne({
-      where: {
-        user_id: req.params.idUser,
-      },
-    });
+    const existUser = await getUser(req.params.idUser);
+
     if (!existUser) {
       res.status(422).json({
         ResponseCode: "01",
@@ -81,7 +87,7 @@ module.exports = {
       user_name: req.body.user_name,
       active: req.body.active,
     };
-    console.log(data);
+
     await data_user
       .update(data, {
         where: {
@@ -100,11 +106,8 @@ module.exports = {
       });
   },
   async deleteuser(req, res) {
-    const existUser = await data_user.findOne({
-      where: {
-        user_id: req.params.idUser,
-      },
-    });
+    const existUser = await getUser(req.params.idUser);
+
     if (!existUser) {
       res.status(422).json({
         ResponseCode: "01",
@@ -112,7 +115,7 @@ module.exports = {
       });
       return;
     }
-    console.log(req.params.idUser);
+
     await data_user
       .destroy({
         where: {
@@ -122,7 +125,7 @@ module.exports = {
       .then((result) => {
         res.status(201).json({
           ResponseCode: "00",
-          ResponseDesc: "Success create user",
+          ResponseDesc: `Success delete user ${req.params.idUser}`,
           data: result,
         });
       })
