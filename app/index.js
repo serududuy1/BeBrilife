@@ -7,6 +7,7 @@ const path = require("path");
 const app = express();
 
 app.use(cors());
+
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
@@ -14,7 +15,9 @@ app.get("/", (req, res) => {
     message: "Selamat Datang",
   });
 });
+
 app.use(routes);
+
 app.use("*", (req, res) => {
   res.status(404).json({
     message: "URL TIDAK TERSEDIA",
@@ -28,4 +31,5 @@ app.use((error, req, res, next) => {
 
   res.status(status).json({ message, data });
 });
+
 module.exports = app;
